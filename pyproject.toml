@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "vector-prolog"
+version = "0.1.0"
+description = ""
+authors = ["Emily Ingram <lmingram@ualberta.ca>"]
+readme = "README.md"
+packages = [{include = "vector_prolog"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
