@@ -9,14 +9,12 @@ This may be faster than the method swi-prolog uses. This may also make building 
 1. Implement genetic algorithm for creating two vectors within a certain distance of eachother. 
 1. Implement genetic algorithm for creating four vectors, two vector pairs. Where each pair consists of a starting vector and an ending vector. Subtracting an ending vector from the starting vector from the same pair creates a relation vector. Adding the relation vector two the starting vector in the other pair should get that pair's ending vector.
 
-TODO Finish example
-
 # Example Use
 ```python
 from vector_prolog.vectorbase import PologVectorbase
 from vector_prolog import vector_rule
 
-pvb = PrologVectorbase(dimensions=3, membership_radius=3)
+pvb = PrologVectorbase()
 
 pvb.add_relationship("safety inspector", "Homer")
 pvb.add_relationship("homemaker", "Marge")
@@ -31,14 +29,19 @@ pvb.add_relationship("parent", "Marge", "Lisa")
 pvb.add_rule(
     name="siblings",
     arguments=["x", "y"],
+    variables=["z"]
     body=vector_rule.intersect(
-        vector_rule.do_query("parent", None, arg="x"),
-        vector_rule.do_query("parent", None, arg="y"),
+        vector_rule.do_query("parent", None, "x").eq("z"),
+        vector_rule.do_query("parent", None, "y").eq("z"),
+        vector_rule.not_equal("x", "y")
     ),
 )
 
 pvb.compile()
 
-pvb.query("safety inspector", "Homer") # should return 1
-pvb.query("safety inspector", "Marge") # should return 0
+pvb.query("safety inspector", "Homer").as_int() # should return 1
+pvb.query("safety inspector", "Marge").as_int() # should return 0
+pvb.query("student").as_list() # should return ['Bart', 'Lisa']
+pvb.query("parent").as_list(flatten=True) # should return [['Homer', 'Bart'], ['Homer', 'Lisa'], etc.]
+pvb.query("siblings", "Bart").as_list() # should return ['Lisa'] 
 ```
