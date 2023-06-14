@@ -25,8 +25,8 @@ pvb.add_relationship("parent", "Homer", "Bart")
 pvb.add_relationship("parent", "Homer", "Lisa")
 pvb.add_relationship("parent", "Marge", "Bart")
 pvb.add_relationship("parent", "Marge", "Lisa")
-pvb.add_relationship("parent", "Homer", "Magie")
-pvb.add_relationship("parent", "Marge", "Magie")
+pvb.add_relationship("parent", "Homer", "Maggie")
+pvb.add_relationship("parent", "Marge", "Maggie")
 
 pvb.add_rule(
     name="siblings",
@@ -45,5 +45,5 @@ pvb.query("safety inspector", "Homer").as_int() # should return 1
 pvb.query("safety inspector", "Marge").as_int() # should return 0
 pvb.query("student").as_list() # should return ['Bart', 'Lisa']
 pvb.query("parent").as_list() # should return [['Homer', 'Bart'], ['Homer', 'Lisa'], etc.]
-pvb.query("siblings", "Bart").as_list() # should return ['Lisa'] 
+pvb.query("siblings", "Bart").as_list() # should return ['Lisa', 'Maggie'] 
 ```
