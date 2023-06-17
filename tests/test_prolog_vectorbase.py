@@ -10,11 +10,6 @@ def test_should_have_attribute_add_relationship():
 def test_add_relationship_should_be_callable():
     assert callable(PrologVectorbase().add_relationship)
 
-@given(name=st.text(), atom=st.one_of(st.integers(), st.floats(), st.text()))
-def test_add_relationship_takes_a_string_and_at_least_one_atom(name, atom):
-    vectorbase = PrologVectorbase()
-    vectorbase.add_relationship(name, atom)
-
 @given(name=st.text(), atoms=st.lists(elements=st.one_of(st.integers(), st.floats(), st.text())))
 def test_add_relationship_takes_a_string_and_multiple_atoms(name, atoms):
     vectorbase = PrologVectorbase()
