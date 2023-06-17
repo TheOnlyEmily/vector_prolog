@@ -1,0 +1,1 @@
+from vector_prolog.vectorbase import PrologVectorbase
