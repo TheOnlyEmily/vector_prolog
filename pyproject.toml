@@ -11,6 +11,9 @@ python = "^3.10"
 torch = "^2.0.1"
 
 
+[tool.poetry.group.dev.dependencies]
+hypothesis = "^6.78.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
