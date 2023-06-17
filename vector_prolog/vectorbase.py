@@ -1,2 +1,3 @@
 class PrologVectorbase:
-    add_relationship = None
+    def add_relationship(self):
+        ...
