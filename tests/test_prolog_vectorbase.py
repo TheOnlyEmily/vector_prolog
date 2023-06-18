@@ -22,3 +22,9 @@ def test_add_relationship_raises_relation_error_when_0_atoms_given(name):
     vectorbase = PrologVectorbase()
     with pytest.raises(RelationError, match="relationship must have at least one atom"):
         vectorbase.add_relationship(name)
+
+@given(name=st.text(), atoms=st.lists(elements=st.one_of(st.integers(), st.floats(), st.text())))
+def test_add_relationship_returns_none(name, atoms):
+    assume(len(atoms) > 0)
+    vectorbase = PrologVectorbase()
+    assert vectorbase.add_relationship(name, *atoms) == None
