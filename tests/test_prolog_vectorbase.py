@@ -20,5 +20,5 @@ def test_add_relationship_takes_a_string_and_multiple_atoms(name, atoms):
 @given(name=st.text())
 def test_add_relationship_raises_relation_error_when_0_atoms_given(name):
     vectorbase = PrologVectorbase()
-    with pytest.raises(RelationError):
+    with pytest.raises(RelationError, match="relationship must have at least one atom"):
         vectorbase.add_relationship(name)
