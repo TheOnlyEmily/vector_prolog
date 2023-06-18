@@ -1,6 +1,6 @@
 import pytest
 from hypothesis import given, assume, strategies as st
-from vector_prolog.vectorbase import PrologVectorbase, RelationError
+from vector_prolog.vectorbase import PrologVectorbase, RelationError, CompileWarning
 
 def test_init_should_take_no_arguments():
     PrologVectorbase()
@@ -37,10 +37,25 @@ def test_attribute_compile_is_callable():
     vectorbase = PrologVectorbase()
     assert callable(vectorbase.compile)
 
+@pytest.mark.filterwarnings("ignore:nothing to compile")
 def test_compile_takes_no_arguments():
     vectorbase = PrologVectorbase()
     vectorbase.compile() 
 
+@pytest.mark.filterwarnings("ignore:nothing to compile")
 def test_compile_returns_none():
     vectorbase = PrologVectorbase()
     assert vectorbase.compile() == None 
+
+def test_compile_issues_warning_when_no_relationships_are_added():
+    vectorbase = PrologVectorbase()
+    with pytest.warns(CompileWarning, match="nothing to compile"):
+        vectorbase.compile()
+
+@pytest.mark.filterwarnings("error:nothing to compile")
+@given(name=st.text(), atoms=st.lists(elements=st.one_of(st.integers(), st.floats(), st.text())))
+def test_calling_compile_after_add_relationship_should_not_produce_warning(name, atoms):
+    assume(len(atoms) > 0)
+    vectorbase = PrologVectorbase()
+    vectorbase.add_relationship(name, *atoms)
+    vectorbase.compile()
