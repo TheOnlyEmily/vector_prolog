@@ -28,3 +28,19 @@ def test_add_relationship_returns_none(name, atoms):
     assume(len(atoms) > 0)
     vectorbase = PrologVectorbase()
     assert vectorbase.add_relationship(name, *atoms) == None
+
+def test_has_attribute_compile():
+    vectorbase = PrologVectorbase()
+    assert hasattr(vectorbase, "compile")
+
+def test_attribute_compile_is_callable():
+    vectorbase = PrologVectorbase()
+    assert callable(vectorbase.compile)
+
+def test_compile_takes_no_arguments():
+    vectorbase = PrologVectorbase()
+    vectorbase.compile() 
+
+def test_compile_returns_none():
+    vectorbase = PrologVectorbase()
+    assert vectorbase.compile() == None 
