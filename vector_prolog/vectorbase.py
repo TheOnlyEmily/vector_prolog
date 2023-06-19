@@ -24,6 +24,7 @@ class PrologVectorbase:
         self._can_compile = True
         self._can_query=False
 
+# TODO change CompileWarning to CompileError
     def compile(self) -> None:
         if not self._can_compile:
             warnings.warn("nothing to compile", CompileWarning)
