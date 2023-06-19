@@ -17,6 +17,13 @@ def test_add_relationship_takes_a_string_and_multiple_atoms(name, atoms):
     vectorbase = PrologVectorbase()
     vectorbase.add_relationship(name, *atoms)
 
+@given(name=st.one_of(st.integers(), st.floats()), atoms=st.lists(elements=st.one_of(st.integers(), st.floats(), st.text())))
+def test_add_relationship_raises_relation_error_when_name_is_not_a_string(name, atoms):
+    assume(len(atoms) > 0)
+    vectorbase = PrologVectorbase()
+    with pytest.raises(RelationError, match="relationship name must have type string"):
+        vectorbase.add_relationship(name, *atoms)
+
 @given(name=st.text())
 def test_add_relationship_raises_relation_error_when_0_atoms_given(name):
     vectorbase = PrologVectorbase()

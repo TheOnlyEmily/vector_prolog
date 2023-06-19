@@ -17,6 +17,8 @@ class PrologVectorbase:
         self._can_query: bool = False
 
     def add_relationship(self, name: str, *atoms: Any):
+        if type(name) is not str:
+            raise RelationError("relationship name must have type string")
         if len(atoms) == 0:
             raise RelationError("relationship must have at least one atom")
         self._can_compile = True
