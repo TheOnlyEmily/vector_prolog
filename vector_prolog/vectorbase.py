@@ -22,7 +22,7 @@ class PrologVectorbase:
         self._can_compile = True
         self._can_query=False
 
-    def compile(self):
+    def compile(self) -> None:
         if not self._can_compile:
             warnings.warn("nothing to compile", CompileWarning)
         self._can_query = True
